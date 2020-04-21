@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Music Upload{% endblock %}
+{% block content %}
+
+<form action="/upload-music" method="POST" enctype="multipart/form-data">
+<div class="form-group">
+    <label>Select Music</label>
+    <div class="custom-file">
+        <script type="text/javascript"></script>
+        <script>
+            function filesize(elem){
+                var size = elem.files[0].size;
+                document.cookie = 'filesize=' + size;
+            }
+        </script>
+        <input oninput="filesize(this);" type="file" class="custom-file-input" name="music" id="music">
+        <label class="custom-file-label" for="music">Select music ...</label>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary">Upload Music</button>
+</form>
+{% endblock %}
+

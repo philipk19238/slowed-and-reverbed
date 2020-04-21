@@ -1,0 +1,70 @@
+.navbar.navbar-center{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.display-4 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 80px;
+}
+
+.lead {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+
+}
+
+.jumbotron {
+    height: 100vh;
+    margin-bottom: 0px;
+    background-image: url('/static/rain.jpg');
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    display: flex;
+    align-items: center;
+}
+.btn-primary.btn-lg{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    width: 20%;
+}
+
+@media (max-width: 767px) {
+
+    /* ... */
+
+    .top-content .carousel-control-prev,
+    .top-content .carousel-control-next { display: none; }
+    .top-content .carousel-indicators li { margin-left: 10px; margin-right: 10px; }
+    /* ... */
+
+}
+
+#main_container{
+    background-color: grey;
+}
+
+.carousel-control-prev {
+  margin-left: -100px;
+}
+
+.carousel-control-next {
+  margin-right: -100px;
+}
+
+#button {
+    height: 75;
+}
+
+#breaker{
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
