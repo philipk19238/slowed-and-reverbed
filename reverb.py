@@ -64,7 +64,7 @@ class Reverb:
         """
         final = self.convert_reverb()
         music_name = find_name(self.music_location)
-        write(music_name + '.wav', rate=self.read_rate * 0.9, data=final)
+        write(music_name + '.wav', rate=int(self.read_rate * 0.9), data=final)
         #addes 'slowed_reverbed' to song name
         convert_mp3(music_name, 'slowed_reverbed')
 

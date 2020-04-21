@@ -12,7 +12,7 @@ def convert_wav(musicName, add_title=None):
     subprocess.call(cmd.split(' '))
 
 def convert_mp3(musicName, add_title=None):
-     """
+    """
      This function converts a WAV file to a MP3 file using FFMPEG
 
      It also has the option of adding text to the converted file
