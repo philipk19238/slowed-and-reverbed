@@ -34,10 +34,14 @@ def find_name(file):
             break
     return file[:-index]
 
+def convert_mp4(file):
+    cmd = f'ffmpeg -i {file} {find_name(file) + ".mp4"}'
+    subprocess.call(cmd.split(' '))
+
 def add_music(video_file,music_file):
     """
     This function combines video and audio using FFMPEG
     """
-    output_file = find_name(music_file) + '_slow_and_reverbed.mp4'
+    output_file = find_name(music_file) + '_slow_and_reverbed_video.mp4'
     cmd = f'ffmpeg -y -i {video_file} -i {music_file} -c copy -map 0:v:0 -map 1:a:0 {output_file}'
     subprocess.call(cmd.split(' '))

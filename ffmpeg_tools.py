@@ -4,6 +4,7 @@ from conversions import *
 import math
 import os
 import time
+import sys
 
 def convert_time(time):
     """
@@ -98,6 +99,7 @@ class Media:
     def set_size(self, size_list):
         """
         This function uses FFMPEG to set the dimensions of a video/file according to the user's preferences.
+        It accepts an array [width,  height] and uses those dimensions to resize the file
         It outputs '_temp' + self.file and points self.file to the newly generated file
         """
         width = size_list[0]
@@ -107,34 +109,109 @@ class Media:
 
         self.file = f'_temp{self.file}'
 
-    def set_duration(self, duration, target_name=None):
-        time = convert_time(duration)
+    def subclip(self, start_time, end_time, target_name=None):
+        """
+        This function uses FFMPEG to create a "subclip" out of the original video clip
+        It accepts three inputs:
+                -> start_time: int
+                -> end_time: int
+                -> target_name: string
+        The script uses function convert_time to convert numerical integers into the hh/mm/ss string format
+        It then uses the output to cut the correct segment out of the original video
+        """
+        duration = duration - start_time
+        start_time = convert_time(start_time)
+        time = convert_time(end_time)
 
         if target_name:
-            cmd = f'ffmpeg -y -ss 00:00:00 -i {self.file} -t {time} -map 0 -vcodec copy -acodec copy {target_name}'
+            cmd = f'ffmpeg -y -ss {start_time} -i {self.file} -t {time} -map 0 -vcodec copy -acodec copy {target_name}'
             subprocess.call(cmd.split(' '))
             self.file = target_name
         else:
-            cmd = f'ffmpeg -y -ss 00:00:00 -i {self.file} -t {time} -map 0 -vcodec copy -acodec copy {"_temp" + self.file}'
+            cmd = f'ffmpeg -y -ss {start_time} -i {self.file} -t {time} -map 0 -vcodec copy -acodec copy {"_temp" + self.file}'
+            subprocess.call(cmd.split(' '))
+            self.file = '_temp' + self.file
+
+    def set_duration(self, duration, target_name=None):
+        """
+        This function uses FFMPEG to create a new video that adheres to the time duration set by the user
+        It accepts two inputs
+                -> duration: int
+                -> target_name: string
+        It uses the convert_time function to convert numerical integers into the hh/mm/ss string format
+        It then uses that output to cut the correct segment out of the end of the original video
+        """
+        start_time = convert_time(0)
+        time = convert_time(duration)
+
+        if target_name:
+            cmd = f'ffmpeg -y -ss {start_time} -i {self.file} -t {time} -map 0 -vcodec copy -acodec copy {target_name}'
+            subprocess.call(cmd.split(' '))
+            self.file = target_name
+        else:
+            cmd = f'ffmpeg -y -ss {start_time} -i {self.file} -t {time} -map 0 -vcodec copy -acodec copy {"_temp" + self.file}'
             subprocess.call(cmd.split(' '))
             self.file = '_temp' + self.file
 
     def loop(self, target_duration):
+        """
+        This function uses FFMPEG to loop the original user video until it meets the duration set by the user
+        It accepts one input:
+                -> target_duration: int
+
+        The script divides target_duration with the duration of the video and rounds the number up, arriving at the amount
+        of times the video has to "repeat" in order for the combined duration to be at or greater than the target_duration
+
+        Then, using command line arguments, the script will copy the original video "repeat" amount of times and adds the names
+        of the copied videos into a text file. That text file is then fed into a FFMPEG command which will then concatenate all the videos
+        listed within the file into a singular video
+        """
         curr = self.duration()
         repeat = math.ceil(target_duration/curr)
         f = open('list.txt','w')
         for i in range(repeat):
-            f.write(f"file '{file_types(self.file)[1]}{i}.{file_types(self.file)[0]}'\n")
+            extension, name = file_types(self.file)
+            f.write(f"file '{name}{i}.{extension}'\n")
             #make sure to change depending on operating system
-            cmd = f'copy {self.file} {f"{file_types(self.file)[1]}{i}.{file_types(self.file)[0]}"}'
-            subprocess.call(cmd.split(' '), shell=True)
+            cmd = f'cp {self.file} {name}{i}.{extension}'
+            print(cmd)
+            subprocess.call(cmd, shell=True)
         f.close()
         time.sleep(1)
         cmd = f'ffmpeg -y -f concat -safe 0 -i list.txt -c copy {"_temp" + self.file}'
         subprocess.call(cmd.split(' '))
         self.file = '_temp' + self.file
+        self.set_duration(target_duration)
+
 
     def overlay(self, video, image):
+        """
+        The script uses FFMPEG to overlay an image over a video. It accepts two inputs.
+                -> video: string (location of video)
+                -> image: string (location of string)
+
+        Example outputs:
+                -> Overlay a snow animation over village
+                -> Overlay a rain animation over city
+        """
         cmd = f'ffmpeg -y -i {image} -i {video} -filter_complex [1:v]colorkey=0x000000:0.5:0.5[ckout];[0:v][ckout]overlay[out] -map [out] -c:a copy -c:v libx264 {"_temp" + video}'
         subprocess.call(cmd.split(' '))
         self.file = "_temp" + video
+
+if __name__ == '__main__':
+    image = Media(sys.argv[1])
+    video = Media(sys.argv[2])
+    song = Media(sys.argv[3])
+
+    target_duration = song.duration()
+    if video.duration() > 10:
+        video.set_duration(10)
+    video.set_size(image.size())
+    video.overlay(video.file, image.file)
+    video.loop(target_duration)
+    add_music(video.file, song.file)
+    cleanup()
+
+
+
+
