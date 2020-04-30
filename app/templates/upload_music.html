@@ -1,24 +1,184 @@
 {% extends "base.html" %}
 {% block title %}Music Upload{% endblock %}
 {% block content %}
-
-<form action="/upload-music" method="POST" enctype="multipart/form-data">
-<div class="form-group">
-    <label>Select Music</label>
-    <div class="custom-file">
-        <script type="text/javascript"></script>
-        <script>
-            function filesize(elem){
-                var size = elem.files[0].size;
-                document.cookie = 'filesize=' + size;
-            }
-        </script>
-        <input oninput="filesize(this);" type="file" class="custom-file-input" name="music" id="music">
-        <label class="custom-file-label" for="music">Select music ...</label>
-    </div>
+    <div class="row justify-content-center header">
+    <h1 class='display-4'>choose your reverb.</h1>
+</div>
+<div class="row justify-content-center lead">
+    <p class="lead">Your song. Your vibe.</p>
 </div>
 
-<button type="submit" class="btn btn-primary">Upload Music</button>
-</form>
+
+<div class="jumbotron reverb">
+        <form class="card-deck reverb" action="/upload-music" method="POST">
+            <div class="card reverb">
+                <div class="card-header">
+                    <span class="dot" id="dot1"></span>
+                    <span class="dot" id="dot2"></span>
+                    <span class="dot" id="dot3"></span>
+
+                </div>
+                <div class="card-body">
+                <p style="text-align: center"><img class="card-img-top mx-auto d-block" src="https://image.flaticon.com/icons/svg/583/583007.svg"></p>
+                </div>
+                <div class="card-footer">
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse0" value="Greek 7 Echo Hall" data-toggle="modal" data-target="#exampleModal" onclick="user_choice(this.id);" type="button"><h5 id="button_style">greek theatre</h5></button></h5>
+                </div>
+            </div>
+       
+        
+            <div class="card reverb">
+                <div class="card-header">
+                    <span class="dot" id="dot1"></span>
+                    <span class="dot" id="dot2"></span>
+                    <span class="dot" id="dot3"></span>
+
+                </div>
+                <div class="card-body">
+                <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/2830/2830354.svg"></p>
+                </div>
+                <div class="card-footer">
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse1" value="French 18th Century Salon" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">city hall</h5></button></h5>
+                </div>
+            </div>
+       
+       
+            <div class="card reverb">
+                <div class="card-header">
+                    <span class="dot" id="dot1"></span>
+                    <span class="dot" id="dot2"></span>
+                    <span class="dot" id="dot3"></span>
+
+                </div>
+                <div class="card-body">
+                <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/2132/2132457.svg"></p>
+                </div>
+                <div class="card-footer">
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse2" value="Small Drum Room" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">recording studio</h5></button></h5>
+                </div>
+            </div>
+      
+        </form>
+
+        <form class="card-deck reverb" action="/upload-music" method="POST">
+          
+                <div class="card reverb">
+                    <div class="card-header">
+                    <span class="dot" id="dot1"></span>
+                    <span class="dot" id="dot2"></span>
+                    <span class="dot" id="dot3"></span>
+                </div>
+                    <div class="card-body">
+                    <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/2240/2240730.svg"></p>
+                    </div>
+                    <div class="card-footer">
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse3" value="Deep Space" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">deep space</h5></button></h5>
+                </div>
+                </div>
+           
+                <div class="card reverb">
+                    <div class="card-header">
+                    <span class="dot" id="dot1"></span>
+                    <span class="dot" id="dot2"></span>
+                    <span class="dot" id="dot3"></span>
+
+                    </div>
+                    <div class="card-body">
+                    <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/1778/1778282.svg"></p>
+                    </div>
+                    <div class="card-footer">
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse4" value="Parking Garage" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">parking garage</h5></button></h5>
+                </div>
+                </div>
+           
+        
+                <div class="card reverb">
+                    <div class="card-header">
+                    <span class="dot" id="dot1"></span>
+                    <span class="dot" id="dot2"></span>
+                    <span class="dot" id="dot3"></span>
+
+                    </div>
+                    <div class="card-body">
+                    <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/1861/1861320.svg"></p>
+                    </div>
+                    <div class="card-footer">
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse5" value="Scala Milan Opera Hall" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">concert hall</h5></button></h5>
+                </div>
+                </div>
+           
+        </div>
+    </form>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" id="close_button" class="dot"></span>
+        </button> 
+      </div>
+      <div class="modal-body">
+        <div class="row title">
+            <div class="col">
+                <h1 class="display-4 music-upload">Upload Music</h1>
+            </div>
+        </div>
+        <div class="row body">
+            <div class="col">
+                <form action="/upload-music" method="POST" enctype="multipart/form-data">
+                    <div class="custom-file">
+                        <input oninput="filesize(this);" type="file" class="custom-file-input" name="music" id="music">
+                        <label class="custom-file-label" for="music">Choose File</label>
+                    </div>
+                        <p style="text-align: center;"><button type="submit" class="btn btn-secondary" id="upload_button">Upload</button><p>
+                </form>
+            </div>
+        </div>
+ 
+      </div>
+      <div class="modal-footer">
+      </div>
+  </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    function submit_entry(id){
+        var impulse = document.getElementById(id).value;
+        entry = {
+            impulse: impulse
+        };
+
+        var current_window = window.origin
+
+        $.ajax({
+            url: current_window + '/upload-music',
+            type: 'POST',
+            data: JSON.stringify(entry),
+            contentType: 'application/json;charset=UTF-8'
+        });
+
+    }
+</script>
+
+<script>
+    function filesize(elem){
+    var size = elem.files[0].size;
+    document.cookie = 'filesize=' + size;
+    }
+</script>
+
+<script>
+    function user_choice(id){
+        var impulse = document.getElementById(id).value;
+        document.cookie = 'user_choice=' + impulse;
+    }
+</script>
 {% endblock %}
 

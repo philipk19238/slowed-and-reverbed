@@ -6,9 +6,9 @@ def convert_wav(musicName, add_title=None):
 
     It also has the option of adding text to the converted file
     """
-    cmd = f"ffmpeg -i {musicName}.mp3 -vn -ar 44100 -ac 2 -b:a 192k {musicName}.wav"
+    cmd = f"ffmpeg -y -i {musicName}.mp3 -vn -ar 44100 -ac 2 -b:a 192k {musicName}.wav"
     if add_title:
-        cmd = f"ffmpeg -i {musicName}.mp3 -vn -ar 44100 -ac 2 -b:a 192k {musicName + add_title}.wav"
+        cmd = f"ffmpeg -y -i {musicName}.mp3 -vn -ar 44100 -ac 2 -b:a 192k {musicName + add_title}.wav"
     subprocess.call(cmd.split(' '))
 
 def convert_mp3(musicName, add_title=None):
@@ -17,9 +17,9 @@ def convert_mp3(musicName, add_title=None):
 
      It also has the option of adding text to the converted file
     """
-    cmd = f"ffmpeg -i {musicName}.wav -vn -ar 44100 -ac 2 -b:a 192k {musicName}.mp3"
+    cmd = f"ffmpeg -y -i {musicName}.wav -vn -ar 44100 -ac 2 -b:a 192k {musicName}.mp3"
     if add_title:
-        cmd = f"ffmpeg -i {musicName}.wav -vn -ar 44100 -ac 2 -b:a 192k {musicName + add_title}.mp3"
+        cmd = f"ffmpeg -y -i {musicName}.wav -vn -ar 44100 -ac 2 -b:a 192k {musicName + add_title}.mp3"
     subprocess.call(cmd.split(' '))
 
 def find_name(file):
@@ -35,7 +35,7 @@ def find_name(file):
     return file[:-index]
 
 def convert_mp4(file):
-    cmd = f'ffmpeg -i {file} {find_name(file) + ".mp4"}'
+    cmd = f'ffmpeg -y -i {file} {find_name(file) + ".mp4"}'
     subprocess.call(cmd.split(' '))
 
 def add_music(video_file,music_file):

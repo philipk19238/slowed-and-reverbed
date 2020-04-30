@@ -4,63 +4,41 @@
 <div class="jumbotron vertical-center">
     <div class="container container-simplified">
         <h1 class="display-4"><b>slow & reverb</b></h1>
-
         <p></p>
         <p class="lead">your favorite songs. free.</p>
         <p></p>
-        <button type="button" class="btn btn-primary btn-lg"
+        <button id="home" type="button" class="btn btn-primary btn-lg main"
         onclick="location.href='{{ url_for('upload_music') }}'">Start Now</button>
         <br><br><br><br>
     </div>
 </div>
-<!-- Top content -->
-<div class="top-content" id="main_container">
-    <div class="container">
-        <!-- Title and description row -->
-        <!-- End title and description row -->
-        <!-- Carousel row -->
-        <div class="row">
-            <div class="col col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                <br><br>
-                <!-- Carousel -->
-                <div id="carousel-class" class="carousel slide">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-class" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-class" data-slide-to="1"></li>
-                        <li data-target="#carousel-class" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/6hgVihWjK2c?rel=0" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/84910153?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;color=ffffff" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oiKj0Z_Xnjc" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carousel-class" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carousel-class" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
 
-                <br><br>
-                <!-- End carousel -->
-            </div>
-        </div>
-        <!-- End carousel row -->
+<div class="jumbotron landing-page">
+<div class="card-deck">
+  <div class="card video">
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/W91XvBo1jM8" allowfullscreen></iframe>
     </div>
+    <div class="card-footer">
+      <small class="text-muted">video & music effects generated using our algorithm</small>
+    </div>
+  </div>
+  <div class="card video">
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AjzYZ4_6dU0" allowfullscreen></iframe>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">video & music effects generated using our algorithm</small>
+    </div>
+  </div>
+  <div class="card video">
+    <div class="embed-responsive embed-responsive-16by9" id="headerPopup">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/F4qCSH6_jng" allowfullscreen></iframe>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">video & music effects generated using our algorithm</small>
+    </div>
+  </div>
+</div>
 </div>
 {% endblock %}

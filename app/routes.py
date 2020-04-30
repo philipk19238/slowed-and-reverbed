@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, send_from_directory
+from flask import render_template, request, redirect, url_for, send_from_directory, jsonify, make_response
 from app import app
 import os
 from werkzeug.utils import secure_filename
@@ -10,6 +10,8 @@ def home():
 
 @app.route('/upload-music', methods = ['GET', 'POST'])
 def upload_music():
+    impulse_list = []
+
     if request.method == 'POST':
         if request.files:
             #checking for file size using data from cookies
@@ -18,6 +20,8 @@ def upload_music():
                 return redirect(request.url)
 
             music = request.files["music"]
+            impulse = request.cookies.get('user_choice')
+            impulse = f'/{impulse}.wav'
 
             if music.filename == "":
                 #checking for blank filenames
@@ -38,10 +42,14 @@ def upload_music():
                 print('{} Saved'.format(filename))
 
                 #applying reverb algorithm
-                path = build_reverb(filename)
+                path = build_reverb(filename, impulse)
 
                 #downloads the slowed & reverbed file
                 return send_from_directory(app.config['MUSIC_UPLOADS'], path, as_attachment=True)
+
+        if request.json:
+            impulse_list.append(request.json['impulse'])
+            print(impulse_list)
 
     return render_template('upload_music.html')
 

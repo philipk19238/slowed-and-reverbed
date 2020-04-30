@@ -119,7 +119,7 @@ class Media:
         The script uses function convert_time to convert numerical integers into the hh/mm/ss string format
         It then uses the output to cut the correct segment out of the original video
         """
-        duration = duration - start_time
+        duration = end_time - start_time
         start_time = convert_time(start_time)
         time = convert_time(end_time)
 
