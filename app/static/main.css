@@ -304,7 +304,6 @@
 
 .modal-body {
     background: white;
-    margin: 2vw;
 }
 
 .modal-footer{
@@ -354,3 +353,68 @@
 .row.body {
     margin-top: 2.5vh;
 }
+
+.card.upload-button{
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    height: 13vh;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+    margin-top: 3vh;
+}
+
+.card.upload-button:hover {
+  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
+}
+
+.card-deck.upload-choice{
+    margin-left: 12vh;
+    margin-right: 12vh;
+    height: 20vh;
+}
+
+.card-img-top.upload-choice {
+    height: auto;
+    width: auto\9; /* ie8 */
+    max-height: 10vh;
+    margin-top: 1.5vh;
+}
+
+#youtube:hover{
+    background-color: #F4C5D0;
+}
+
+#computer:hover{
+    background: #F4C5D0;
+}
+
+.modal-body.upload-choice{
+    background: white;
+    margin: 0px;
+}
+
+.display-4.upload-choice {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 3vh;
+    color: black;
+}
+
+.previous{
+    display: inline-block;
+    background-color: white;
+    color: black;
+    margin-left: 1vh;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 2vh;
+}
+
+.previous:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+

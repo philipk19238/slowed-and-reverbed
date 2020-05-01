@@ -22,7 +22,7 @@
                 <p style="text-align: center"><img class="card-img-top mx-auto d-block" src="https://image.flaticon.com/icons/svg/583/583007.svg"></p>
                 </div>
                 <div class="card-footer">
-                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse0" value="Greek 7 Echo Hall" data-toggle="modal" data-target="#exampleModal" onclick="user_choice(this.id);" type="button"><h5 id="button_style">greek theatre</h5></button></h5>
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse0" value="Greek 7 Echo Hall" data-toggle="modal" data-target="#uploadChoice" onclick="user_choice(this.id);" type="button"><h5 id="button_style">greek theatre</h5></button></h5>
                 </div>
             </div>
        
@@ -38,7 +38,7 @@
                 <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/2830/2830354.svg"></p>
                 </div>
                 <div class="card-footer">
-                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse1" value="French 18th Century Salon" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">city hall</h5></button></h5>
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse1" value="French 18th Century Salon" data-toggle="modal" data-target="#uploadChoice" type="button" onclick="user_choice(this.id);"><h5 id="button_style">city hall</h5></button></h5>
                 </div>
             </div>
        
@@ -54,7 +54,7 @@
                 <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/2132/2132457.svg"></p>
                 </div>
                 <div class="card-footer">
-                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse2" value="Small Drum Room" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">recording studio</h5></button></h5>
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse2" value="Small Drum Room" data-toggle="modal" data-target="#uploadChoice" type="button" onclick="user_choice(this.id);"><h5 id="button_style">recording studio</h5></button></h5>
                 </div>
             </div>
       
@@ -72,7 +72,7 @@
                     <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/2240/2240730.svg"></p>
                     </div>
                     <div class="card-footer">
-                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse3" value="Deep Space" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">deep space</h5></button></h5>
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse3" value="Deep Space" data-toggle="modal" data-target="#uploadChoice" type="button" onclick="user_choice(this.id);"><h5 id="button_style">deep space</h5></button></h5>
                 </div>
                 </div>
            
@@ -87,7 +87,7 @@
                     <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/1778/1778282.svg"></p>
                     </div>
                     <div class="card-footer">
-                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse4" value="Parking Garage" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">parking garage</h5></button></h5>
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse4" value="Parking Garage" data-toggle="modal" data-target="#uploadChoice" type="button" onclick="user_choice(this.id);"><h5 id="button_style">parking garage</h5></button></h5>
                 </div>
                 </div>
            
@@ -103,7 +103,7 @@
                     <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/1861/1861320.svg"></p>
                     </div>
                     <div class="card-footer">
-                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse5" value="Scala Milan Opera Hall" data-toggle="modal" data-target="#exampleModal" type="button" onclick="user_choice(this.id);"><h5 id="button_style">concert hall</h5></button></h5>
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse5" value="Scala Milan Opera Hall" data-toggle="modal" data-target="#uploadChoice" type="button" onclick="user_choice(this.id);"><h5 id="button_style">concert hall</h5></button></h5>
                 </div>
                 </div>
            
@@ -145,6 +145,72 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade bd-example-modal-lg" id="uploadChoice" tabindex="-1" role="dialog" aria-labelledby="uploadChoiceLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" id="close_button" class="dot"></span>
+        </button> 
+      </div>
+      <div class="modal-body upload-choice">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-4 upload-choice">Select upload method</h1>
+            </div>
+        </div>
+        <div class="card-deck upload-choice">
+            <button class="card upload-button d-flex align-items-center justify-content-center" id="computer" onclick="video_upload()">
+                <img class="card-img-top upload-choice" src="https://image.flaticon.com/icons/svg/2223/2223754.svg">
+            </button>
+            <button class="card upload-button d-flex align-items-center justify-content-center" id="youtube" onclick="youtube()">
+                <img class="card-img-top upload-choice" src="https://image.flaticon.com/icons/svg/814/814106.svg">
+            </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+  </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="youtubeChoice" tabindex="-1" role="dialog" aria-labelledby="youtubeChoiceLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" id="close_button" class="dot"></span>
+        </button> 
+      </div>
+      <div class="modal-body">
+        <div class="row title">
+            <div class="col">
+                <h1 class="display-4 music-upload">YouTube to Mp3</h1>
+            </div>
+        </div>
+        <div class="row body">
+            <div class="col">
+                <form action="/upload-music" method="POST" enctype="multipart/form-data">
+                    <div class="custom-file">
+                        <input oninput="filesize(this);" type="file" class="custom-file-input" name="music" id="music">
+                        <label class="custom-file-label" for="music">Choose File</label>
+                    </div>
+                        <p style="text-align: center;"><button type="submit" class="btn btn-secondary" id="upload_button">Upload</button><p>
+                </form>
+            </div>
+        </div>
+ 
+      </div>
+      <div class="modal-footer">
+      </div>
+  </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block script %}
@@ -180,5 +246,22 @@
         document.cookie = 'user_choice=' + impulse;
     }
 </script>
+
+<script>
+    function video_upload(){
+        $("#uploadChoice").modal('hide');
+        $("#exampleModal").modal();
+    }
+</script>
+
+<script>
+    function youtube(){
+        $("#uploadChoice").modal('hide');
+        $("#youtubeChoice").modal();
+
+    }
+</script>
+
 {% endblock %}
+
 
