@@ -61,24 +61,6 @@ def upload_music():
     return render_template('upload_music.html')
 
 
-@app.route("/upload-video", methods=['GET','POST'])
-
-def upload_video():
-    if request.method == 'POST':
-
-        filesize = request.cookies.get("filesize")
-        file = file.get_json()
-        print(file)
-        print(filesize)
-        print(file)
-
-        res = make_response(jsonify({"message":f"{file.filename} uploaded"}), 200)
-        return res
-
-    return render_template('test.html')
-
-
-
 
 
 
