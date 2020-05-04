@@ -1,7 +1,10 @@
 import os
 from conversions import *
 from reverb import Reverb
+from youtube_dl import YoutubeDL
+import flask 
 from app import app
+
 
 def file_types(filename):
     '''
@@ -83,5 +86,32 @@ def build_reverb(filename, impulse='/French 18th Century Salon.wav'):
         pass
 
     return '{}slowed_reverbed.mp3'.format(name)
+
+def get_music(url):
+    """
+    This function uses youtube_dl to download videos from youtube and converting them into mp3
+    It returns a string (title of the Youtube video)
+    """
+    ydl_opts = {
+            'format': 'bestaudio/best',
+            'extractaudio': True,
+            'audioformat': 'mp3',
+            'outtmpl': f"{app.config['MUSIC_UPLOADS']}/%(title)s.%(ext)s",
+            'noplaylist': 'True',
+            'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'wav',
+                    'preferredquality': '192',
+                }],
+    }
+    with YoutubeDL(ydl_opts) as ydl:
+        info_dict = ydl.extract_info(url, download=False)
+        ydl.download([url])
+        title = f"{info_dict.get('title', None)}.wav"
+
+    os.rename(f"{app.config['MUSIC_UPLOADS']}/{title}", f"{app.config['MUSIC_UPLOADS']}/{''.join(title.split(' '))}")
+
+    return "".join(title.split(' '))
+        
 
 

@@ -198,6 +198,8 @@ class Media:
         subprocess.call(cmd.split(' '))
         self.file = "_temp" + video
 
+    
+
 if __name__ == '__main__':
     image = Media(sys.argv[1])
     video = Media(sys.argv[2])

@@ -9,5 +9,7 @@ app.config['IMPULSES'] = '/mnt/c/Users/Philip/Documents/GitHub/slowandreverbed/i
 app.config['IMAGE_UPLOADS'] = '/mnt/c/Users/Philip/Documents/GitHub/slowandreverbed/app/static/assets/images'
 app.config['OVERLAY_UPLOADS'] = '/mnt/c/Users/Philip/Documents/GitHub/slowandreverbed/app/static/assets/overlays'
 app.config['GIF_UPLOADS'] = '/mnt/c/Users/Philip/Documents/GitHub/slowandreverbed/app/static/assets/gifs'
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
 
-from app import routes
+from app import routes		

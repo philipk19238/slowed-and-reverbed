@@ -156,6 +156,11 @@
         </button> 
       </div>
       <div class="modal-body upload-choice">
+        <div class="flashes">
+            {% for message in get_flashed_messages() %}
+             {{message}}
+            {% endfor %}
+        </div>
         <div class="row">
             <div class="col">
                 <h1 class="display-4 upload-choice">Select upload method</h1>
@@ -193,16 +198,22 @@
         </div>
         <div class="row body">
             <div class="col">
-                <form action="/upload-music" method="POST" enctype="multipart/form-data">
-                    <div class="custom-file">
-                        <input oninput="filesize(this);" type="file" class="custom-file-input" name="music" id="music">
-                        <label class="custom-file-label" for="music">Choose File</label>
+                    <div class="form-group">
+                        <input type="url" class="form-control" id="file_input" placeholder="Enter YouTube URL">
                     </div>
-                        <p style="text-align: center;"><button type="submit" class="btn btn-secondary" id="upload_button">Upload</button><p>
-                </form>
+                    <p style="text-align: center;"><button class="btn btn-secondary" id="upload_btn" onclick="upload('{{request.url}}')">Upload</button><p>
+                    <p style="text-align: center;"><img src="/static/ajax-loader.gif"/ id="loading_gif" class="d-none"></p>
+            </div>
+            <div id="alert_wrapper"></div>
+        </div>
+
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <audio controls id="audio" class='d-none'>
+                    <source src="" type="audio/mp3" id="music_player">
+                </audio>
             </div>
         </div>
- 
       </div>
       <div class="modal-footer">
       </div>
@@ -214,25 +225,6 @@
 {% endblock %}
 
 {% block script %}
-<script>
-    function submit_entry(id){
-        var impulse = document.getElementById(id).value;
-        entry = {
-            impulse: impulse
-        };
-
-        var current_window = window.origin
-
-        $.ajax({
-            url: current_window + '/upload-music',
-            type: 'POST',
-            data: JSON.stringify(entry),
-            contentType: 'application/json;charset=UTF-8'
-        });
-
-    }
-</script>
-
 <script>
     function filesize(elem){
     var size = elem.files[0].size;
@@ -260,6 +252,78 @@
         $("#youtubeChoice").modal();
 
     }
+</script>
+
+<script>
+    function clear_form(){
+        $(document).on('click', '#upload_button', function(){
+            $('#url_box').value="";
+        })
+    }
+</script>
+
+<script type="text/javascript">
+
+    var input = document.getElementById('file_input');
+
+    function show_alert(message, alert){
+        alert_wrapper.innerHTML= `
+                <div class="alert alert-${alert} alert-dismissible fade show" role="alert">
+                    <span>${message}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                `;
+    };
+
+    function upload(url){
+
+        if (!input.value) {
+            show_alert("No file selected", "warning");
+            return;
+        }
+
+        var request = new XMLHttpRequest();
+
+        request.responseType = "json";
+
+        var upload_btn = document.getElementById('upload_btn');
+
+        var loading_gif = document.getElementById('loading_gif');
+
+        var file_input = document.getElementById('file_input');
+
+        alert_wrapper.innerHTML = "";
+
+        input.disabled = true;
+
+        upload_btn.classList.add('d-none');
+
+        loading_gif.classList.remove('d-none');
+
+        request.addEventListener("load", function(e){
+
+            if (request.status == 200){
+                show_alert(`${request.response.message}`, 'success');
+                document.getElementById('music_player').src = `/static/music/uploads/${request.response.message}`;
+                loading_gif.classList.add('d-none');
+                file_input.classList.add('d-none');
+                document.getElementById('audio').classList.remove('d-none');
+                document.getElementById('audio').load();
+                document.getElementById('audio').play();
+            }
+
+            else{
+                show_alert('Error', 'danger');
+            }
+        })
+
+        request.open('POST', url);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify({'url':input.value}))
+    }
+
 </script>
 
 {% endblock %}

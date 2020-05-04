@@ -1,5 +1,4 @@
-from flask import render_template, request, redirect, url_for, send_from_directory, jsonify, make_response
-from app import app
+from flask import render_template, request, redirect, url_for, send_from_directory, jsonify, make_response, flash, Markup
 import os
 from werkzeug.utils import secure_filename
 from web_scripts import *
@@ -35,24 +34,48 @@ def upload_music():
 
             else:
                 #checking for malicious filenames
-                filename = secure_filename(music.filename)
-
+                filename = "".join(secure_filename(music.filename).split(' '))
                 #saving uploaded music into directory
                 music.save(os.path.join(app.config["MUSIC_UPLOADS"],filename))
                 print('{} Saved'.format(filename))
 
                 #applying reverb algorithm
                 path = build_reverb(filename, impulse)
+                print(path)
 
                 #downloads the slowed & reverbed file
                 return send_from_directory(app.config['MUSIC_UPLOADS'], path, as_attachment=True)
 
-        if request.json:
-            impulse_list.append(request.json['impulse'])
-            print(impulse_list)
+        else:
+            url = request.get_json()['url']
+            #downloading file from youtube
+            try:
+                filename = get_music(url)
+                impulse = f'/{request.cookies.get("user_choice")}.wav'
+                path = build_reverb(filename, impulse)
+                return make_response(jsonify({'message':path}), 200)
+
+            except:
+                return make_response(jsonify({'message':'Please enter a valid URL'}), 300)
 
     return render_template('upload_music.html')
 
+
+@app.route("/upload-video", methods=['GET','POST'])
+
+def upload_video():
+    if request.method == 'POST':
+
+        filesize = request.cookies.get("filesize")
+        file = file.get_json()
+        print(file)
+        print(filesize)
+        print(file)
+
+        res = make_response(jsonify({"message":f"{file.filename} uploaded"}), 200)
+        return res
+
+    return render_template('test.html')
 
 
 

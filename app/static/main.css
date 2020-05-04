@@ -83,6 +83,7 @@
     color: black;
     font-weight: bold;
     font-family: 'Open Sans', sans-serif;
+    outline: 0;
 }
 
 #home:hover {
@@ -258,11 +259,13 @@
     left: 50%;
     transform: translate(-50%,-50%);
     margin-top: 16.25vh;
+    outline: 0;
 }
 
 .btn.btn-primary.reverb:hover{
     background: #828282;
     color: white;
+    outline: 0;
 }
 
 #button_style{
@@ -270,6 +273,7 @@
     font-weight: normal;
     margin-top: .6vh;
     font-family: 'Roboto', sans-serif;
+    outline: 0;
 }
 
 #dot1 {
@@ -300,6 +304,7 @@
   transform: translate(-50%,-50%);
   color: black;
   opacity: 1;
+  outline: 0;
 }
 
 .modal-body {
@@ -315,10 +320,12 @@
     opacity: 1 !important;
     position: absolute;
     transform: translateX(-50%);
+    outline: 0;
 }
 
 #close_button:hover{
     background: red;
+    outline: 0;
 }
 
 #upload_button {
@@ -332,10 +339,12 @@
     border: none;
     border-radius: 12px;
     padding: .5vh;
+    outline: 0;
 }
 
 #upload_button:hover{
     background: #DD345A;
+    outline: 0;
 }
 
 .music-upload {
@@ -343,7 +352,9 @@
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
     text-align: left;
-    margin-bottom: 2vh;
+    margin-bottom: 3vh;
+    outline: 0;
+    margin-top: 3vh;
 }
 
 .row.title {
@@ -362,6 +373,7 @@
     margin-left: 1.5vw;
     margin-right: 1.5vw;
     margin-top: 3vh;
+    outline: 0;
 }
 
 .card.upload-button:hover {
@@ -383,6 +395,7 @@
 
 #youtube:hover{
     background-color: #F4C5D0;
+    padding: 15px, 15px;
 }
 
 #computer:hover{
@@ -402,19 +415,3 @@
     margin: 3vh;
     color: black;
 }
-
-.previous{
-    display: inline-block;
-    background-color: white;
-    color: black;
-    margin-left: 1vh;
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 2vh;
-}
-
-.previous:hover{
-    background-color: #ddd;
-    color: black;
-}
-
-
