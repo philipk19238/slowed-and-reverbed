@@ -141,7 +141,7 @@
         <div class="row" style="padding: 0px; margin-bottom: 0px;">
             <div class="col">
                 <p style="text-align: center; padding: 0px; margin-bottom: 0vh;"><div id="alert_wrapper_file"></div></p>
-                <p style="text-align: center; font-family: 'Roboto', sans-serif; font-size: 12px; color: #FC1880;" id="loading_text_file" class="d-none">Reverb process may take up to 30 seconds</p>
+                <p style="text-align: center; font-family: 'Roboto', sans-serif; font-size: 12px; color: #5A5A5A ;" id="loading_text_file" class="d-none">Reverb process may take up to 30 seconds</p>
             </div>
         </div>
     </div>
@@ -210,7 +210,7 @@
         <div class="row" style="padding: 0px; margin-bottom: 0px;">
             <div class="col">
                 <p style="text-align: center; padding: 0px; margin-bottom: 0vh;"><div id="alert_wrapper"></div></p>
-                <p style="text-align: center; font-family: 'Roboto', sans-serif; font-size: 12px; color: #FC1880;" id="loading_text_youtube" class="d-none">Reverb process may take up to 30 seconds</p>
+                <p style="text-align: center; font-family: 'Roboto', sans-serif; font-size: 12px; color: #5A5A5A;" id="loading_text_youtube" class="d-none">Reverb process may take up to 30 seconds</p>
             </div>
         </div>
     </div>
@@ -365,7 +365,7 @@
                 upload_btn.classList.remove('d-none');
                 input.disabled = false;
                 loading_gif.classList.add('d-none');
-                input.innerHTML = "";
+                input.innerText = "";
                 loading_text.classList.add('d-none');
             }
 
@@ -374,7 +374,7 @@
                 input.disabled = false;
                 upload_btn.classList.remove('d-none');
                 loading_gif.classList.add('d-none');
-                input.innerHTML = "";
+                input.innerText = "";
                 loading_text.classList.add('d-none');
             }
         })

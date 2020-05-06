@@ -53,6 +53,7 @@ def upload_music():
                 return make_response(jsonify({'message':path, 'title':title}), 200)
 
             except:
+                
                 return make_response(jsonify({'message':'Please enter a valid URL'}), 300)
 
     return render_template('upload_music.html')
