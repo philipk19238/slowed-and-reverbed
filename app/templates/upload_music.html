@@ -84,10 +84,10 @@
 
                     </div>
                     <div class="card-body">
-                    <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/1778/1778282.svg"></p>
+                    <p style="text-align: center"><img class="card-img-top" src="https://image.flaticon.com/icons/svg/508/508881.svg"></p>
                     </div>
                     <div class="card-footer">
-                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse4" value="Parking Garage" data-toggle="modal" data-target="#uploadChoice" type="button" onclick="user_choice(this.id);"><h5 id="button_style">parking garage</h5></button></h5>
+                    <h5 class="card-title" style="text-align: center"><button class="btn btn-primary reverb" name="reverb" id="impulse4" value="Ruby Room" data-toggle="modal" data-target="#uploadChoice" type="button" onclick="user_choice(this.id);"><h5 id="button_style">ruby room</h5></button></h5>
                 </div>
                 </div>
            
@@ -112,6 +112,7 @@
 </div>
 
 
+
 <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
@@ -128,23 +129,27 @@
         </div>
         <div class="row body">
             <div class="col">
-                <form action="/upload-music" method="POST" enctype="multipart/form-data">
-                    <div class="custom-file">
-                        <input oninput="filesize(this);" type="file" class="custom-file-input" name="music" id="music">
-                        <label class="custom-file-label" for="music">Choose File</label>
-                    </div>
-                        <p style="text-align: center;"><button type="submit" class="btn btn-secondary" id="upload_button">Upload</button><p>
-                </form>
+                <div class="form-group">
+                       <input type="file" class="custom-file-input" id="file_input_main" oninput="input_filename();">
+                       <label for="file_input" id="file_input_label" class="custom-file-label">Select File</label>
+                </div>
+                    <p style="text-align: center;"><button class="btn btn-secondary" id="file_upload_btn" onclick="file_upload('{{ request.url }}')">Upload</button></p>
+                    <p style="text-align: center;"><img src="/static/ajax-loader.gif" id="loading_gif" class="d-none" style="margin: 2vh;"></p>
             </div>
         </div>
- 
-      </div>
-      <div class="modal-footer">
-      </div>
-  </div>
+
+        <div class="row" style="padding: 0px; margin-bottom: 0px;">
+            <div class="col">
+                <p style="text-align: center; padding: 0px; margin-bottom: 0vh;"><div id="alert_wrapper_youtube"></div></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+    </div>
     </div>
   </div>
-</div>
 
 
 <div class="modal fade bd-example-modal-lg" id="uploadChoice" tabindex="-1" role="dialog" aria-labelledby="uploadChoiceLabel" aria-hidden="true">
@@ -156,11 +161,6 @@
         </button> 
       </div>
       <div class="modal-body upload-choice">
-        <div class="flashes">
-            {% for message in get_flashed_messages() %}
-             {{message}}
-            {% endfor %}
-        </div>
         <div class="row">
             <div class="col">
                 <h1 class="display-4 upload-choice">Select upload method</h1>
@@ -180,7 +180,7 @@
   </div>
     </div>
   </div>
-</div>
+
 
 <div class="modal fade bd-example-modal-lg" id="youtubeChoice" tabindex="-1" role="dialog" aria-labelledby="youtubeChoiceLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -201,83 +201,129 @@
                     <div class="form-group">
                         <input type="url" class="form-control" id="file_input" placeholder="Enter YouTube URL">
                     </div>
-                    <p style="text-align: center;"><button class="btn btn-secondary" id="upload_btn" onclick="upload('{{request.url}}')">Upload</button><p>
-                    <p style="text-align: center;"><img src="/static/ajax-loader.gif"/ id="loading_gif" class="d-none"></p>
+                    <p style="text-align: center;"><button class="btn btn-secondary" id="upload_btn" onclick="upload('{{ request.url }}')">Upload</button></p>
+                    <p style="text-align: center;"><img src="/static/ajax-loader.gif"/ id="loading_gif_youtube" class="d-none" style="margin: 2vh;"></p>
             </div>
-            <div id="alert_wrapper"></div>
         </div>
 
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <audio controls id="audio" class='d-none'>
+        <div class="row" style="padding: 0px; margin-bottom: 0px;">
+            <div class="col">
+                <p style="text-align: center; padding: 0px; margin-bottom: 0vh;"><div id="alert_wrapper"></div></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg" id="playModal" tabindex="-1" role="dialog" aria-labelledby="playModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" id="close_button" class="dot"></span>
+        </button> 
+      </div>
+      <div class="modal-body audio">
+        <div class="row body audio">
+            <div class="col" style="text-align: center;">
+            <div class='card video-body'>
+            </div>
+            <div class="row" style="margin-bottom: 0px; padding: 0px;">
+                <div class="col">
+                    <h4 id=song_name style="margin-top: 2vh; text-align: center;"></h4>
+                    <p style="text-align: center; color: #FC1880; font-family: 'Roboto', sans-serif;">Now Playing</p>
+                </div>
+            </div>
+                    <div class="col d-flex justify-content-center" style="padding: 0px; margin-top: 0px;">
+                <audio controls id="audio">
                     <source src="" type="audio/mp3" id="music_player">
                 </audio>
             </div>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-      </div>
-  </div>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+    </div>
     </div>
   </div>
-</div>
+
+<button onclick="lol();"></button>
 
 {% endblock %}
 
 {% block script %}
 <script>
+
+    $('#playModal').on('hidden.bs.modal', function(e) {
+
+      document.getElementById('audio').pause();
+
+    })
+
+
+
     function filesize(elem){
+
     var size = elem.files[0].size;
+
     document.cookie = 'filesize=' + size;
     }
-</script>
 
-<script>
     function user_choice(id){
+
         var impulse = document.getElementById(id).value;
+
         document.cookie = 'user_choice=' + impulse;
     }
-</script>
 
-<script>
     function video_upload(){
+
         $("#uploadChoice").modal('hide');
+
         $("#exampleModal").modal();
     }
-</script>
 
-<script>
     function youtube(){
+
         $("#uploadChoice").modal('hide');
+
         $("#youtubeChoice").modal();
 
     }
-</script>
 
-<script>
     function clear_form(){
+
         $(document).on('click', '#upload_button', function(){
+
             $('#url_box').value="";
         })
     }
-</script>
 
-<script type="text/javascript">
 
-    var input = document.getElementById('file_input');
+    
 
     function show_alert(message, alert){
+
         alert_wrapper.innerHTML= `
                 <div class="alert alert-${alert} alert-dismissible fade show" role="alert">
-                    <span>${message}</span>
+                    <p style="text-align: center;"><span>${message}</span></p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 `;
+
     };
 
     function upload(url){
+
+        var input = document.getElementById('file_input');
 
         if (!input.value) {
             show_alert("No file selected", "warning");
@@ -290,9 +336,9 @@
 
         var upload_btn = document.getElementById('upload_btn');
 
-        var loading_gif = document.getElementById('loading_gif');
+        var loading_gif = document.getElementById('loading_gif_youtube');
 
-        var file_input = document.getElementById('file_input');
+        var song_name = document.getElementById('song_name');
 
         alert_wrapper.innerHTML = "";
 
@@ -305,25 +351,120 @@
         request.addEventListener("load", function(e){
 
             if (request.status == 200){
-                show_alert(`${request.response.message}`, 'success');
+                $("#youtubeChoice").modal('hide');
+                $("#playModal").modal();
                 document.getElementById('music_player').src = `/static/music/uploads/${request.response.message}`;
-                loading_gif.classList.add('d-none');
-                file_input.classList.add('d-none');
+                song_name.innerHTML = request.response.title;
                 document.getElementById('audio').classList.remove('d-none');
                 document.getElementById('audio').load();
-                document.getElementById('audio').play();
+                upload_btn.classList.remove('d-none');
+                input.disabled = false;
+                loading_gif.classList.add('d-none');
+                input.innerHTML = "";
             }
 
             else{
                 show_alert('Error', 'danger');
+                input.disabled = false;
+                upload_btn.classList.remove('d-none');
+                loading_gif.classList.add('d-none');
+                input.innerHTML = "";
             }
         })
 
         request.open('POST', url);
+
         request.setRequestHeader('Content-Type', 'application/json');
+
         request.send(JSON.stringify({'url':input.value}))
     }
 
+    function input_filename(){
+
+        document.getElementById('file_input_label').innerText = document.getElementById('file_input_main').files[0].name;
+    }
+
+    function file_upload(url){
+
+        var data = new FormData();
+
+        var request = new XMLHttpRequest();
+
+        var upload_btn = document.getElementById('file_upload_btn');
+
+        var loading_gif = document.getElementById('loading_gif');
+
+        var input = document.getElementById('file_input_main');
+
+        var alert_wrapper = document.getElementById('alert_wrapper_youtube');
+
+        var file_input_label = document.getElementById('file_input_label');
+
+        if(!input.value){
+            show_alert("No file selected", "warning");
+            return;
+        }
+
+        request.responseType = "json";
+
+        alert_wrapper.innerHTML = "";
+
+        input.disabled=true;
+
+        upload_btn.classList.add('d-none');
+
+        loading_gif.classList.remove('d-none');
+
+        var file = input.files[0];
+
+        var filename = file.name;
+
+        var filesize = file.size;
+
+        document.cookie = `filesize=${filesize}`;
+
+        data.append('file', file);
+
+        request.addEventListener('load', function(e){
+
+            if(request.status == 200){
+
+                $("#exampleModal").modal('hide');
+                $("#playModal").modal();
+                document.getElementById('music_player').src = `/static/music/uploads/${request.response.message}`;
+                file_input.classList.add('d-none');
+                song_name.innerHTML = request.response.title;
+                document.getElementById('audio').classList.remove('d-none');
+                document.getElementById('audio').load();
+                upload_btn.classList.remove('d-none');
+                input.disabled = false;
+                loading_gif.add('d-none');
+                file_input_label.innerHTML = "";
+
+            }
+
+            else{
+
+                show_alert(request.response.message, 'danger');
+                loading_gif.classList.add('d-none');
+                upload_btn.classList.remove('d-none');
+                input.disabled = false;
+                file_input_label.innerHTML = "";
+            }
+
+        })
+
+        request.open('post', url);
+
+        request.send(data);6   
+    }
+
+    function lol(){
+
+        $("#playModal").modal();
+
+    }
+    
 </script>
 
 {% endblock %}

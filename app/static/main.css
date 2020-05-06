@@ -206,7 +206,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    padding-bottom: 3vh;
+    padding-bottom: 4vh;
 }
 
 .card-header{
@@ -227,7 +227,7 @@
 }
 
 .card-footer{
-    height: 7vh;
+    height: 10vh;
     background: #E5E5E5;
     border-top: 1px solid black;
     border-bottom: 2px solid black;
@@ -258,7 +258,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    margin-top: 16.25vh;
+    margin-top: 14.75vh;
     outline: 0;
 }
 
@@ -274,6 +274,7 @@
     margin-top: .6vh;
     font-family: 'Roboto', sans-serif;
     outline: 0;
+    text-align: center;
 }
 
 #dot1 {
@@ -289,7 +290,7 @@
 }
 
 .card.card-modal {
-    height: 50vh;
+    height: 60vh;
     border: none;
     background: #202020;
 }
@@ -309,6 +310,9 @@
 
 .modal-body {
     background: white;
+    padding: 0px;
+    margin-left: 5vw;
+    margin-right: 5vw;
 }
 
 .modal-footer{
@@ -328,7 +332,7 @@
     outline: 0;
 }
 
-#upload_button {
+.btn.btn-secondary {
     margin-top: 2vh;
     width: 14%;
     background: #FC1880;
@@ -342,7 +346,7 @@
     outline: 0;
 }
 
-#upload_button:hover{
+.btn.btn-secondary:hover{
     background: #DD345A;
     outline: 0;
 }
@@ -384,11 +388,12 @@
     margin-left: 12vh;
     margin-right: 12vh;
     height: 20vh;
+    width: auto;
 }
 
 .card-img-top.upload-choice {
     height: auto;
-    width: auto\9; /* ie8 */
+    width: auto; /* ie8 */
     max-height: 10vh;
     margin-top: 1.5vh;
 }
@@ -414,4 +419,25 @@
     font-size: 30px;
     margin: 3vh;
     color: black;
+}
+
+#audio {
+    width: 40vmax;
+    padding: 0px;
+    margin-bottom: 2vh;
+}
+
+.card.video-body {
+    height: 40vmin;
+    background-image: url('/static/cassete.gif');
+    background: cover;
+    margin-left: 6vmax;
+    margin-right: 6vmax;
+    width: 40vmin;
+    display: inline-block;
+}
+
+.modal-body.audio{
+    padding-bottom: 1.5vmax;
+    padding-top: 1.5vmax;
 }

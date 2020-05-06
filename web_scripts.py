@@ -111,7 +111,7 @@ def get_music(url):
 
     os.rename(f"{app.config['MUSIC_UPLOADS']}/{title}", f"{app.config['MUSIC_UPLOADS']}/{''.join(title.split(' '))}")
 
-    return "".join(title.split(' '))
+    return "".join(title.split(' ')), find_name(title)
         
 
 
