@@ -43,6 +43,7 @@ def upload_music():
                 return make_response(jsonify({'message':path, 'title':filename}), 200)
 
         except:
+            
             url = request.get_json()['url']
             #downloading file from youtube
             try:
@@ -52,9 +53,8 @@ def upload_music():
                 path = build_reverb(filename, impulse)
                 return make_response(jsonify({'message':path, 'title':title}), 200)
 
-            except:
-                
-                return make_response(jsonify({'message':'Please enter a valid URL'}), 300)
+            except Exception as e:
+                return make_response(jsonify({'message':e}), 300)
 
     return render_template('upload_music.html')
 

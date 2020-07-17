@@ -11,10 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/acebc5d574.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    {{ charts_init }}
     <title>{% block title %}{% endblock %}</title>
     <link rel="shortcut icon" type="image/svg" href= "https://image.flaticon.com/icons/svg/2885/2885655.svg" />
 </head>
 <body>
+
     <nav class="navbar sticky-top navbar-light" id="nav1">
         <div class="container-simple">
         <a class="navbar-brand" href="http://127.0.0.1:5000/" id="logo">s & r</a>
@@ -28,6 +33,7 @@
             </li>
         </ul>
     </nav>
+
     {% block content %}
     {% endblock %}
 
@@ -40,7 +46,6 @@
     </div>
 
     <p class="copyright">Copyright © 2020 Philip Kung</p>
-
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"

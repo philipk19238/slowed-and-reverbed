@@ -1,10 +1,10 @@
 import subprocess
-from web_scripts import *
-from conversions import *
 import math
 import os
 import time
 import sys
+from conversions import *
+from web_scripts import *
 
 def convert_time(time):
     """
@@ -178,6 +178,7 @@ class Media:
             subprocess.call(cmd, shell=True)
         f.close()
         time.sleep(1)
+
         cmd = f'ffmpeg -y -f concat -safe 0 -i list.txt -c copy {"_temp" + self.file}'
         subprocess.call(cmd.split(' '))
         self.file = '_temp' + self.file
@@ -200,11 +201,12 @@ class Media:
 
     
 
+    
+
 if __name__ == '__main__':
     image = Media(sys.argv[1])
     video = Media(sys.argv[2])
-    song = Media(sys.argv[3])
-
+    song = Media(sys.argv[3]) 
     target_duration = song.duration()
     if video.duration() > 10:
         video.set_duration(10)
@@ -213,7 +215,4 @@ if __name__ == '__main__':
     video.loop(target_duration)
     add_music(video.file, song.file)
     cleanup()
-
-
-
 
